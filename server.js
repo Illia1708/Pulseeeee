@@ -14,7 +14,7 @@ const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(",").map((origin) => origin.trim()).filter(Boolean)
   : ["*"];
 const DB_FILE = path.join(__dirname, "db.json");
-const FRONTEND_DIR = path.join(__dirname, "..");
+const FRONTEND_DIR = __dirname;
 
 const corsOrigin = ALLOWED_ORIGINS.includes("*")
   ? true
