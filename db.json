@@ -1,0 +1,413 @@
+{
+  "version": 3,
+  "theme": "light",
+  "users": [
+    {
+      "id": "me",
+      "name": "Ярослав",
+      "handle": "yaroslav",
+      "password": "demo123",
+      "role": "Creator",
+      "location": "Kyiv",
+      "bio": "Створюю свою першу круту соцмережу без бекенду.",
+      "skills": [
+        "Python",
+        "HTML",
+        "JS"
+      ],
+      "privateMode": false,
+      "lastSeenAt": 1780211842018,
+      "joinedAt": 1779619327167,
+      "typingChatId": "",
+      "typingAt": 0
+    },
+    {
+      "id": "lina",
+      "name": "Ліна Кодер",
+      "handle": "lina.dev",
+      "password": "demo123",
+      "role": "Frontend engineer",
+      "location": "Lviv",
+      "bio": "Люблю чисті інтерфейси, дизайн системи і швидкі прототипи.",
+      "skills": [
+        "Frontend",
+        "UI",
+        "CSS"
+      ],
+      "privateMode": false,
+      "lastSeenAt": 1780159027167,
+      "joinedAt": 1779019327167,
+      "typingChatId": "",
+      "typingAt": 0
+    },
+    {
+      "id": "max",
+      "name": "Макс Стартап",
+      "handle": "maxflow",
+      "password": "demo123",
+      "role": "Product builder",
+      "location": "Warsaw",
+      "bio": "Запускаю маленькі продукти, міряю попит і не закохуюсь у зайве.",
+      "skills": [
+        "Product",
+        "MVP",
+        "Growth"
+      ],
+      "privateMode": false,
+      "lastSeenAt": 1780158427167,
+      "joinedAt": 1778719327167,
+      "typingChatId": "",
+      "typingAt": 0
+    },
+    {
+      "id": "ira",
+      "name": "Іра Motion",
+      "handle": "irart",
+      "password": "demo123",
+      "role": "Visual designer",
+      "location": "Odesa",
+      "bio": "Анімація, фото, події, плакати і візуальні експерименти.",
+      "skills": [
+        "Motion",
+        "Photo",
+        "Brand"
+      ],
+      "privateMode": false,
+      "lastSeenAt": 1780157527167,
+      "joinedAt": 1779139327167,
+      "typingChatId": "",
+      "typingAt": 0
+    },
+    {
+      "id": "den",
+      "name": "Ден Дані",
+      "handle": "dataden",
+      "password": "demo123",
+      "role": "Data analyst",
+      "location": "Dnipro",
+      "bio": "Перетворюю сирі дані на графіки, які реально читають.",
+      "skills": [
+        "Data",
+        "Charts",
+        "SQL"
+      ],
+      "privateMode": true,
+      "lastSeenAt": 1780155727167,
+      "joinedAt": 1779439327167,
+      "typingChatId": "",
+      "typingAt": 0
+    },
+    {
+      "id": "nazar",
+      "name": "Назар Sound",
+      "handle": "nazar.wave",
+      "password": "demo123",
+      "role": "Audio maker",
+      "location": "Ivano-Frankivsk",
+      "bio": "Пишу музику для роликів, ігор і невеликих брендів.",
+      "skills": [
+        "Audio",
+        "Music",
+        "Games"
+      ],
+      "privateMode": false,
+      "lastSeenAt": 1780153927167,
+      "joinedAt": 1779259327167,
+      "typingChatId": "",
+      "typingAt": 0
+    }
+  ],
+  "following": {
+    "me": [
+      "lina",
+      "max"
+    ],
+    "lina": [
+      "me",
+      "ira",
+      "den"
+    ],
+    "max": [
+      "me",
+      "lina",
+      "den"
+    ],
+    "ira": [
+      "lina",
+      "nazar"
+    ],
+    "den": [
+      "max"
+    ],
+    "nazar": [
+      "ira"
+    ]
+  },
+  "posts": [
+    {
+      "id": "p1780168240916",
+      "authorId": "me",
+      "text": "пр",
+      "tags": [],
+      "mood": "idea",
+      "likes": [],
+      "comments": [],
+      "createdAt": 1780168240916
+    },
+    {
+      "id": "p1780159488119",
+      "authorId": "me",
+      "text": "🎉 Бекенд готовий! Реальні оновлення працюють на всіх пристроях. Пуста синхронізуємось! #pulse #realtime",
+      "tags": [
+        "#pulse",
+        "#realtime"
+      ],
+      "mood": "idea",
+      "likes": [],
+      "comments": [],
+      "createdAt": 1780159488119
+    },
+    {
+      "id": "p1",
+      "authorId": "lina",
+      "text": "Запустила новий дизайн профілю. Тепер картки чистіші, а кнопки не стрибають на мобільних.",
+      "tags": [
+        "#design",
+        "#frontend"
+      ],
+      "mood": "progress",
+      "likes": [
+        "me",
+        "max",
+        "ira"
+      ],
+      "comments": [
+        {
+          "id": "c1",
+          "authorId": "me",
+          "text": "Виглядає солідно.",
+          "createdAt": 1780151527167
+        },
+        {
+          "id": "c2",
+          "authorId": "max",
+          "text": "Треба ще темну тему.",
+          "createdAt": 1780152247167
+        }
+      ],
+      "createdAt": 1780156807167
+    },
+    {
+      "id": "p2",
+      "authorId": "max",
+      "text": "Ідея дня: соцмережа для маленьких команд, де кожен пост прив'язаний до конкретного прогресу.",
+      "tags": [
+        "#startup",
+        "#product"
+      ],
+      "mood": "idea",
+      "likes": [
+        "lina",
+        "den"
+      ],
+      "comments": [
+        {
+          "id": "c3",
+          "authorId": "lina",
+          "text": "Це вже звучить як MVP.",
+          "createdAt": 1780155247167
+        }
+      ],
+      "createdAt": 1780154167167
+    },
+    {
+      "id": "p3",
+      "authorId": "ira",
+      "text": "Зробила серію постерів для локальної події. Найкраще працює контраст теплого акценту і спокійної бази.",
+      "tags": [
+        "#art",
+        "#visual"
+      ],
+      "mood": "launch",
+      "likes": [
+        "nazar"
+      ],
+      "comments": [],
+      "createdAt": 1780149487167
+    },
+    {
+      "id": "p4",
+      "authorId": "den",
+      "text": "Маленька порада: якщо метрика не впливає на рішення, її не треба виносити на головний дашборд.",
+      "tags": [
+        "#data",
+        "#product"
+      ],
+      "mood": "idea",
+      "likes": [
+        "me",
+        "max"
+      ],
+      "comments": [
+        {
+          "id": "c4",
+          "authorId": "me",
+          "text": "Заберу це в нотатки.",
+          "createdAt": 1780154047167
+        }
+      ],
+      "createdAt": 1780146727167
+    }
+  ],
+  "chats": [
+    {
+      "id": "chat-lina",
+      "participants": [
+        "me",
+        "lina"
+      ],
+      "messages": [
+        {
+          "id": "m1",
+          "authorId": "lina",
+          "text": "Я додала темну тему в макет. Хочеш подивитись?",
+          "createdAt": 1780157047167,
+          "attachments": [],
+          "editedAt": 0,
+          "deletedAt": 0,
+          "readBy": [
+            "lina",
+            "me"
+          ]
+        },
+        {
+          "id": "m2",
+          "authorId": "me",
+          "text": "Так, і ще хочу чат прямо в Pulse.",
+          "createdAt": 1780157467167,
+          "attachments": [],
+          "editedAt": 0,
+          "deletedAt": 0,
+          "readBy": [
+            "me"
+          ]
+        },
+        {
+          "id": "m3",
+          "authorId": "lina",
+          "text": "Тоді робимо повний прототип.",
+          "createdAt": 1780157767167,
+          "attachments": [],
+          "editedAt": 0,
+          "deletedAt": 0,
+          "readBy": [
+            "lina",
+            "me"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chat-max",
+      "participants": [
+        "me",
+        "max"
+      ],
+      "messages": [
+        {
+          "id": "m4",
+          "authorId": "max",
+          "text": "Для MVP вистачить постів, профілів і приватних діалогів.",
+          "createdAt": 1780152127167,
+          "attachments": [],
+          "editedAt": 0,
+          "deletedAt": 0,
+          "readBy": [
+            "max"
+          ]
+        },
+        {
+          "id": "m5",
+          "authorId": "me",
+          "text": "Зробимо, але щоб виглядало масштабно.",
+          "createdAt": 1780152487167,
+          "attachments": [],
+          "editedAt": 0,
+          "deletedAt": 0,
+          "readBy": [
+            "me"
+          ]
+        }
+      ]
+    }
+  ],
+  "notifications": [
+    {
+      "id": "n1",
+      "userId": "me",
+      "actorId": "lina",
+      "text": "прокоментувала твій пост у демо-стрічці.",
+      "view": "feed",
+      "read": true,
+      "createdAt": 1780158247167
+    },
+    {
+      "id": "n2",
+      "userId": "me",
+      "actorId": "max",
+      "text": "написав тобі в чаті.",
+      "view": "chat",
+      "read": true,
+      "createdAt": 1780157767167
+    },
+    {
+      "id": "n3",
+      "userId": "me",
+      "actorId": "den",
+      "text": "оцінив твою ідею про локальну соцмережу.",
+      "view": "notifications",
+      "read": true,
+      "createdAt": 1780144927167
+    }
+  ],
+  "projects": [
+    {
+      "id": "room-pulse",
+      "title": "Pulse Beta",
+      "tag": "#pulse",
+      "status": "Закрита бета",
+      "summary": "Тестова кімната для доробки профілів, чатів і першого публічного запуску.",
+      "progress": 68,
+      "members": [
+        "me",
+        "lina",
+        "max"
+      ]
+    },
+    {
+      "id": "room-design",
+      "title": "Design Lab",
+      "tag": "#design",
+      "status": "Прототип",
+      "summary": "Інтерфейс, картки профілю, мобільні стани й власна айдентика.",
+      "progress": 46,
+      "members": [
+        "lina",
+        "ira"
+      ]
+    },
+    {
+      "id": "room-data",
+      "title": "Data Notes",
+      "tag": "#data",
+      "status": "Ідеї",
+      "summary": "Місце для метрик, тестових інсайтів і майбутньої аналітики спільноти.",
+      "progress": 28,
+      "members": [
+        "den",
+        "max"
+      ]
+    }
+  ],
+  "updatedAt": 1780211842330
+}

@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pulse — соціальна мережа</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <section id="authScreen" class="auth-screen hidden" aria-label="Вхід у Pulse">
+      <div class="auth-copy">
+        <div class="brand brand-large">
+          <span class="brand-mark">P</span>
+          <div>
+            <strong>Pulse</strong>
+            <span>соціальна мережа для ідей, команд і друзів</span>
+          </div>
+        </div>
+        <h1>Створи профіль, пиши пости, спілкуйся в чатах і збирай свою стрічку.</h1>
+        <div class="auth-stats" aria-label="Можливості">
+          <span>пости</span>
+          <span>чати</span>
+          <span>профілі</span>
+          <span>теми</span>
+        </div>
+      </div>
+
+      <div class="auth-panel">
+        <div class="auth-tabs" role="tablist" aria-label="Авторизація">
+          <button class="auth-tab active" data-auth-tab="login" type="button">Вхід</button>
+          <button class="auth-tab" data-auth-tab="register" type="button">Реєстрація</button>
+        </div>
+
+        <form id="loginForm" class="auth-form" data-auth-panel="login">
+          <label>
+            Логін
+            <input name="handle" type="text" autocomplete="username" required />
+          </label>
+          <label>
+            Пароль
+            <input name="password" type="password" autocomplete="current-password" required />
+          </label>
+          <button type="submit">Увійти</button>
+          <button id="demoLogin" class="ghost-button" type="button"></button>
+        </form>
+
+        <form id="registerForm" class="auth-form hidden" data-auth-panel="register">
+          <label>
+            Ім'я
+            <input name="name" type="text" autocomplete="name" placeholder="Твоє ім'я" required />
+          </label>
+          <label>
+            Нікнейм
+            <input name="handle" type="text" autocomplete="username" placeholder="nickname" required />
+          </label>
+          <label>
+            Код доступу
+            <input
+              name="inviteCode"
+              type="text"
+              autocomplete="off"
+              placeholder="Тільки для запрошених"
+              required
+            />
+          </label>
+          <label>
+            Пароль
+            <input name="password" type="password" autocomplete="new-password" minlength="4" placeholder="мінімум 4 символи" required />
+          </label>
+          <p class="form-hint">
+            Доступ до Pulse доступний лише за персональним кодом та виданим нікнеймом.
+          </p>
+          <button type="submit">Створити акаунт</button>
+        </form>
+
+        <p id="authMessage" class="form-message" role="status"></p>
+      </div>
+    </section>
+
+    <div id="appShell" class="app-shell">
+      <aside class="sidebar" aria-label="Навігація">
+        <div class="brand">
+          <span class="brand-mark">P</span>
+          <div>
+            <strong>Pulse</strong>
+            <span>мікроспільнота</span>
+          </div>
+        </div>
+
+        <nav class="nav-list">
+          <button class="nav-item active" data-view="feed" type="button">
+            <span>⌂</span>
+            Стрічка
+          </button>
+          <button class="nav-item" data-view="discover" type="button">
+            <span>⌕</span>
+            Люди
+          </button>
+          <button class="nav-item" data-view="ideas" type="button">
+            <span>✦</span>
+            Ідеї
+          </button>
+          <button class="nav-item" data-view="projects" type="button">
+            <span>▦</span>
+            Проєкти
+          </button>
+          <button class="nav-item" data-view="chat" type="button">
+            <span>✉</span>
+            Чат
+          </button>
+          <button class="nav-item" data-view="notifications" type="button">
+            <span>!</span>
+            Сповіщення
+            <b id="navBadge" class="nav-badge hidden">0</b>
+          </button>
+          <button class="nav-item" data-view="profile" type="button">
+            <span>◎</span>
+            Профіль
+          </button>
+        </nav>
+
+        <div class="sidebar-actions">
+          <button id="themeToggle" class="utility-button" type="button" aria-label="Перемкнути тему">
+            <span id="themeIcon">◐</span>
+            <span id="themeText">Темна тема</span>
+          </button>
+        </div>
+
+        <section class="current-user">
+          <div class="avatar" id="currentAvatar">Я</div>
+          <div>
+            <strong id="currentName">Новий користувач</strong>
+            <span id="currentHandle">@newuser</span>
+          </div>
+          <button id="logoutButton" class="icon-button" type="button" aria-label="Вийти">↪</button>
+        </section>
+      </aside>
+
+      <main class="content">
+        <header class="topbar">
+          <div>
+            <p id="viewEyebrow" class="eyebrow">сьогодні в Pulse</p>
+            <h1 id="viewTitle">Стрічка</h1>
+            <p id="viewSubtitle" class="view-subtitle">Пости людей, яких ти читаєш, і найгарячіші ідеї спільноти.</p>
+          </div>
+          <label class="search">
+            <span>⌕</span>
+            <input id="searchInput" type="search" placeholder="Пошук постів, людей і тегів" />
+          </label>
+        </header>
+
+        <section id="view-feed" class="view-panel active">
+          <section class="composer" aria-label="Новий пост">
+            <div class="avatar" data-current-avatar>Я</div>
+            <form id="postForm">
+              <textarea id="postText" maxlength="360" placeholder="Що нового? Додай #тег, і він з'явиться у трендах."></textarea>
+              <div class="composer-actions">
+                <div class="composer-tools">
+                  <select id="postMood" aria-label="Настрій поста">
+                    <option value="idea">Ідея</option>
+                    <option value="progress">Прогрес</option>
+                    <option value="question">Питання</option>
+                    <option value="launch">Запуск</option>
+                  </select>
+                  <span id="charCount">0/360</span>
+                </div>
+                <button type="submit">Опублікувати</button>
+              </div>
+            </form>
+          </section>
+
+          <div class="feed-toolbar">
+            <div id="feedFilters" class="segmented" aria-label="Фільтри стрічки">
+              <button class="active" data-feed-mode="all" type="button">Усі</button>
+              <button data-feed-mode="following" type="button">Підписки</button>
+              <button data-feed-mode="trending" type="button">Популярне</button>
+            </div>
+            <button id="clearSearch" class="ghost-button small hidden" type="button">Очистити пошук</button>
+          </div>
+
+          <section class="layout-grid">
+            <div>
+              <div id="feed" class="post-list" aria-live="polite"></div>
+              <div id="emptyState" class="empty-state hidden">
+                Нічого не знайдено. Спробуй інший запит або напиши перший пост.
+              </div>
+            </div>
+
+            <aside class="right-rail">
+              <section>
+                <h2>Тренди</h2>
+                <div id="trends" class="tag-list"></div>
+              </section>
+              <section>
+                <h2>Кого читати</h2>
+                <div id="suggestions" class="suggestion-list"></div>
+              </section>
+              <section>
+                <h2>Pulse сьогодні</h2>
+                <div id="networkStats" class="metric-grid"></div>
+              </section>
+            </aside>
+          </section>
+        </section>
+
+        <section id="view-discover" class="view-panel">
+          <div id="peopleGrid" class="people-grid"></div>
+        </section>
+
+        <section id="view-ideas" class="view-panel">
+          <div class="section-head">
+            <div>
+              <h2>Ідеї спільноти</h2>
+              <p>Окреме місце для задумів, питань і міні-концептів.</p>
+            </div>
+            <button id="ideaShortcut" class="ghost-button" type="button">Написати ідею</button>
+          </div>
+          <div id="ideaBoard" class="idea-board"></div>
+        </section>
+
+        <section id="view-projects" class="view-panel">
+          <div class="section-head">
+            <div>
+              <h2>Проєктні кімнати</h2>
+              <p>Статуси, прогрес і невеликі спільноти навколо роботи.</p>
+            </div>
+          </div>
+          <div id="projectBoard" class="project-board"></div>
+        </section>
+
+        <section id="view-chat" class="view-panel">
+          <div class="chat-layout">
+            <aside class="conversation-panel" aria-label="Діалоги">
+              <label class="chat-search">
+                <span>⌕</span>
+                <input id="chatSearch" type="search" placeholder="Почати чат з людиною" />
+              </label>
+              <div id="chatMatches" class="chat-matches hidden"></div>
+              <div class="conversation-list" id="conversationList"></div>
+            </aside>
+            <section class="chat-window">
+              <header class="chat-head" id="chatHead"></header>
+              <div id="messageList" class="message-list" aria-live="polite"></div>
+              <div id="attachmentPreview" class="attachment-preview hidden"></div>
+              <form id="messageForm" class="message-form">
+                <textarea id="messageText" maxlength="500" rows="1" placeholder="Написати повідомлення"></textarea>
+                <div class="message-form-actions">
+                  <input id="attachmentInput" class="hidden" type="file" accept="image/*,.pdf,.txt,.md,.zip" />
+                  <button id="attachButton" class="ghost-button small" type="button">Вкласти</button>
+                  <span id="messageCount">0/500</span>
+                  <button type="submit">Надіслати</button>
+                </div>
+              </form>
+            </section>
+          </div>
+        </section>
+
+        <section id="view-notifications" class="view-panel">
+          <div class="section-head">
+            <div>
+              <h2>Події</h2>
+              <p>Лайки, коментарі, нові підписки й відповіді в чатах.</p>
+            </div>
+            <button id="markRead" class="ghost-button" type="button">Позначити прочитаними</button>
+          </div>
+          <div id="notificationList" class="notification-list"></div>
+        </section>
+
+        <section id="view-profile" class="view-panel">
+          <div class="profile-layout">
+            <section class="profile-card">
+              <div class="profile-cover"></div>
+              <div class="profile-main">
+                <div class="avatar profile-avatar" data-current-avatar>Я</div>
+                <div>
+                  <h2 id="profileName">Новий користувач</h2>
+                  <p id="profileMeta">@newuser</p>
+                  <p id="profileBio">Створюю свою першу круту соцмережу без бекенду.</p>
+                </div>
+              </div>
+              <div id="profileStats" class="metric-grid"></div>
+            </section>
+
+            <form id="profileForm" class="profile-form">
+              <h2>Редагувати профіль</h2>
+              <label class="toggle-row">
+                <input name="privateMode" type="checkbox" />
+                <span>
+                  Напіванонімний режим
+                  <small>У стрічці й коментарях показує коротке ім'я, але друзі все одно можуть відкрити профіль.</small>
+                </span>
+              </label>
+              <label>
+                Ім'я
+                <input name="name" type="text" maxlength="40" required />
+              </label>
+              <label>
+                Нікнейм
+                <input
+                  name="handle"
+                  type="text"
+                  maxlength="24"
+                  required
+                  readonly
+                />
+              </label>
+              <label>
+                Роль
+                <input name="role" type="text" maxlength="40" />
+              </label>
+              <label>
+                Місто
+                <input name="location" type="text" maxlength="40" />
+              </label>
+              <label>
+                Біо
+                <textarea name="bio" maxlength="180"></textarea>
+              </label>
+              <button type="submit">Зберегти профіль</button>
+              <p id="profileMessage" class="form-message" role="status"></p>
+            </form>
+          </div>
+
+          <section>
+            <div class="section-head">
+              <div>
+                <h2>Мої пости</h2>
+                <p>Усе, що ти опублікував у Pulse.</p>
+              </div>
+            </div>
+            <div id="profilePosts" class="post-list"></div>
+          </section>
+        </section>
+
+        <section id="view-person" class="view-panel">
+          <div id="personProfile"></div>
+        </section>
+      </main>
+    </div>
+
+    <template id="postTemplate">
+      <article class="post">
+        <header class="post-head">
+          <div class="avatar"></div>
+          <div>
+            <strong class="author"></strong>
+            <span class="meta"></span>
+          </div>
+          <span class="mood-pill"></span>
+        </header>
+        <p class="post-body"></p>
+        <div class="post-tags"></div>
+        <div class="post-actions">
+          <button class="like-button" type="button"></button>
+          <button class="comment-toggle" type="button"></button>
+          <button class="follow-button" type="button"></button>
+          <button class="profile-button" type="button"></button>
+          <button class="message-button" type="button"></button>
+        </div>
+        <form class="comment-form">
+          <input type="text" maxlength="140" placeholder="Написати коментар" />
+          <button type="submit">Надіслати</button>
+        </form>
+        <div class="comments"></div>
+      </article>
+    </template>
+
+    <script>
+      // Optional override for deployed backend URL.
+      // Set this to your public backend if frontend and backend are deployed separately.
+      window.APP_API_BASE = window.APP_API_BASE || "";
+      window.APP_WS_URL = window.APP_WS_URL || "";
+
+      (() => {
+        const host = window.location.hostname;
+        const isLocalhost = host === "localhost" || host === "127.0.0.1";
+        const backendBase =
+          window.APP_WS_URL ||
+          window.APP_API_BASE ||
+          (isLocalhost ? "http://localhost:3000" : window.location.origin);
+
+        const loadApp = () => {
+          const appScript = document.createElement("script");
+          appScript.src = "app.js";
+          document.body.append(appScript);
+        };
+
+        const socketScript = document.createElement("script");
+        socketScript.src = `${backendBase.replace(/\/$/, "")}/socket.io/socket.io.js`;
+        socketScript.onload = loadApp;
+        socketScript.onerror = loadApp;
+        document.body.append(socketScript);
+      })();
+    </script>
+  </body>
+</html>
